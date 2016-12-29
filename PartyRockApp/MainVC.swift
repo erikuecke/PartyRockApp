@@ -17,23 +17,23 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let p1 = PartyRock(imageURL: "http://www.wavefm.com.au/images/stories/2015/04/redfoo.jpg", videoURL: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/ev4bY1SkZLg\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Lights Out Now")
+        let p1 = PartyRock(imageURL: "http://www.wavefm.com.au/images/stories/2015/04/redfoo.jpg", videoURL: "<iframe width=\"375\" height=\"219\" src=\"https://www.youtube.com/embed/ev4bY1SkZLg\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Lights Out Now")
         
         partyRocks.append(p1)
         
-        let p2 = PartyRock(imageURL: "https://goo.gl/images/TtEH7A", videoURL: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/xGiBiHocSZM\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "New Thang")
+        let p2 = PartyRock(imageURL: "https://goo.gl/images/TtEH7A", videoURL: "<iframe width=\"375\" height=\"219\" src=\"https://www.youtube.com/embed/xGiBiHocSZM\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "New Thang")
         
         partyRocks.append(p2)
         
-        let p3 = PartyRock(imageURL: "https://goo.gl/images/9Iz05l", videoURL: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/CdLhdrNgGu4\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Let's Get Ridiculous")
+        let p3 = PartyRock(imageURL: "https://goo.gl/images/9Iz05l", videoURL: "<iframe width=\"375\" height=\"219\" src=\"https://www.youtube.com/embed/CdLhdrNgGu4\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Let's Get Ridiculous")
         
         partyRocks.append(p3)
         
-        let p4 = PartyRock(imageURL: "https://goo.gl/images/wAlvWm", videoURL: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/tWyuglGCKgE\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Juicy Wiggle")
+        let p4 = PartyRock(imageURL: "https://goo.gl/images/wAlvWm", videoURL: "<iframe width=\"375\" height=\"219\" src=\"https://www.youtube.com/embed/tWyuglGCKgE\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Juicy Wiggle")
         
         partyRocks.append(p4)
         
-        let p5 = PartyRock(imageURL: "https://goo.gl/images/rt1u1e", videoURL: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/BgUvPw0OdU0?list=PLtM4rw7sjPKUe0YW6Fmrp2FSU7RxkX-JA\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Bring Out The Bottles")
+        let p5 = PartyRock(imageURL: "https://goo.gl/images/rt1u1e", videoURL: "<iframe width=\"375\" height=\"219\" src=\"https://www.youtube.com/embed/BgUvPw0OdU0?list=PLtM4rw7sjPKUe0YW6Fmrp2FSU7RxkX-JA\" frameborder=\"0\" allowfullscreen></iframe>", videoTitle: "Bring Out The Bottles")
         
         partyRocks.append(p5)
         
@@ -64,7 +64,24 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let partyRock = partyRocks[indexPath.row]
+        
+        performSegue(withIdentifier: "VideoVC", sender: partyRock)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destination = segue.destination as? VideoVC {
+            
+            if let party = sender as? PartyRock {
+                destination.partyRock = party
+            }
+        }
+    
+    }
 
 }
 
